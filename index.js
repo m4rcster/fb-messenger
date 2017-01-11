@@ -108,6 +108,7 @@
  *
  */
 
+const debug = require('debug')('fb-messenger');
 const request = require('request-promise');
 const crypto = require('crypto');
 
@@ -163,7 +164,7 @@ const Messenger = (options) => {
     };
 
     const dispatch = (action) => {
-        DEBUG && console.log('Messenger Dispatch: ', JSON.stringify(action, null, 3));
+        debug('Dispatch: ', JSON.stringify(action, null, 3));
         const
             muri = 'https://graph.facebook.com/v2.6/me/messages',
             turi = 'https://graph.facebook.com/v2.6/me/thread_settings';
