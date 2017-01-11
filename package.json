@@ -1,0 +1,16 @@
+{
+  "name": "@marcster/fb-messenger",
+  "version": "0.0.1",
+  "description": "Redux action inspired framework to deal with Facebook messenger api.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Marc Liew",
+  "license": "ISC",
+  "dependencies": {
+    "crypto": "0.0.3",
+    "request": "^2.79.0",
+    "request-promise": "^4.1.1"
+  }
+}
