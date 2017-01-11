@@ -40,7 +40,7 @@ Subscriber will be executed each time an incoming request is received. Following
 {
   type: 'QUICK_REPLY',
   sender: fbid,
-  payload: {USER_DEFINED_PAYLOAD}
+  payload: 'USER_DEFINED_PAYLOAD'
 }
 
 {
@@ -78,5 +78,35 @@ Subscriber will be executed each time an incoming request is received. Following
   sender: fbid,
   payload: 'USER_DEFINED_PAYLOAD',
   referral: 'USER_DEFINED_REFERRAL'
+}
+```
+
+## Send Actions to Messenger
+Pass on redux styled actions object to `messenger.dispatch(action)` to send to Facebook Messenger.
+
+```js
+//https://developers.facebook.com/docs/messenger-platform/send-api-reference
+{
+  type: 'MESSAGE',
+  id: fbid,
+  message: {message}
+}
+
+{
+  type: 'SENDER_ACTION',
+  id: fbid,
+  sender_action: 'mark_seen || typing_on || typing_off'
+}
+
+//https://developers.facebook.com/docs/messenger-platform/thread-settings/get-started-button
+//https://developers.facebook.com/docs/messenger-platform/thread-settings/greeting-text
+{
+  type: 'SET_THREAD_SETTINGS',
+  payload: {payload}
+}
+
+{
+  type: 'REMOVE_THREAD_SETTINGS',
+  payload: {payload}
 }
 ```
