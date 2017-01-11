@@ -23,7 +23,8 @@ const listener = (action) => {
   console.log(action)
 }
 
-messenger.subscribe(listener)
+let removeListener = messenger.subscribe(listener)
+// removeListener() to unsubscribe
 ```
 
 ## Recieve Actions
@@ -108,5 +109,20 @@ Pass on redux styled actions object to `messenger.dispatch(action)` to send to F
 {
   type: 'REMOVE_THREAD_SETTINGS',
   payload: {payload}
+}
+```
+
+## Retrieve user profile
+Use `messenger.getUserProfile(fbid)` to get the user profile which Returns
+
+```js
+{
+  first_name: 'First name'
+  last_name: 'Last name'
+  profile_pic: 'Profile picture'
+  locale: 'Locale of the user on Facebook'
+  timezone: 'Timezone, number relative to GMT'
+  gender: 'Gender'
+  is_payment_enabled: true || false
 }
 ```

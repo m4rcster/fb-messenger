@@ -159,7 +159,7 @@ const Messenger = (options) => {
     };
 
     const getUserProfile = (fbid) => {
-        return _send('GET', 'https://graph.facebook.com/v2.6/' + fbid, _getQs({ fields: 'first_name,last_name,profile_pic,locale,timezone,gender' }), true);
+        return _send('GET', 'https://graph.facebook.com/v2.6/' + fbid, _getQs({ fields: 'first_name,last_name,profile_pic,locale,timezone,gender,is_payment_enabled' }), true);
     };
 
     const dispatch = (action) => {
