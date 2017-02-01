@@ -16,7 +16,9 @@ const messenger = require('@marcster/fb-messenger');
 let messenger = Messenger({
    token: FB_PAGE_TOKEN,
    secret: FB_APP_SECRET,
-   verify: FB_VERIFY_TOKEN
+   verify: FB_VERIFY_TOKEN,
+   fields: 'first_name,last_name,profile_pic,locale,timezone,gender,is_payment_enabled'
+
 });
 
 const listener = (action) => {
@@ -34,58 +36,123 @@ Subscriber will be executed each time an incoming request is received. Following
 ```javascript
 {
   type: 'TEXT',
-  sender: fbid,
+  user: {
+    _id: 12394759877,
+    first_name: 'Peter',
+    last_name: 'Chang',
+    profile_pic: 'https://...',
+    locale: 'en_US',
+    timezone: -7,
+    gender: 'male'
+  },
   text: string
 }
 
 {
   type: 'QUICK_REPLY',
-  sender: fbid,
+  user: {
+    _id: 12394759877,
+    first_name: 'Peter',
+    last_name: 'Chang',
+    profile_pic: 'https://...',
+    locale: 'en_US',
+    timezone: -7,
+    gender: 'male'
+  },
   payload: 'USER_DEFINED_PAYLOAD'
 }
 
 {
   type: 'IMAGE',
-  sender: fbid,
+  user: {
+    _id: 12394759877,
+    first_name: 'Peter',
+    last_name: 'Chang',
+    profile_pic: 'https://...',
+    locale: 'en_US',
+    timezone: -7,
+    gender: 'male'
+  },
   url: string
 }
 
 {
   type: 'AUDIO',
-  sender: fbid,
+  user: {
+    _id: 12394759877,
+    first_name: 'Peter',
+    last_name: 'Chang',
+    profile_pic: 'https://...',
+    locale: 'en_US',
+    timezone: -7,
+    gender: 'male'
+  },
   url: string
 }
 
 {
   type: 'VIDEO',
-  sender: fbid,
+  user: {
+    _id: 12394759877,
+    first_name: 'Peter',
+    last_name: 'Chang',
+    profile_pic: 'https://...',
+    locale: 'en_US',
+    timezone: -7,
+    gender: 'male'
+  },
   url: string
 }
 
 {
   type: 'FILE',
-  sender: fbid,
+  user: {
+    _id: 12394759877,
+    first_name: 'Peter',
+    last_name: 'Chang',
+    profile_pic: 'https://...',
+    locale: 'en_US',
+    timezone: -7,
+    gender: 'male'
+  },
   url: string
 }
 
 {
   type: 'LOCATION',
-  sender: fbid,
+  user: {
+    _id: 12394759877,
+    first_name: 'Peter',
+    last_name: 'Chang',
+    profile_pic: 'https://...',
+    locale: 'en_US',
+    timezone: -7,
+    gender: 'male'
+  },
   coordinates: {lat, long}
 }
 
 {
   type: 'POSTBACK',
-  sender: fbid,
+  user: {
+    _id: 12394759877,
+    first_name: 'Peter',
+    last_name: 'Chang',
+    profile_pic: 'https://...',
+    locale: 'en_US',
+    timezone: -7,
+    gender: 'male'
+  },
   payload: 'USER_DEFINED_PAYLOAD',
   referral: 'USER_DEFINED_REFERRAL'
 }
 ```
 
 ## Send Actions to Messenger
+
 Pass on redux styled actions object to `messenger.dispatch(action)` to send to Facebook Messenger.
 
-```js
+```javascript
 //https://developers.facebook.com/docs/messenger-platform/send-api-reference
 {
   type: 'MESSAGE',
@@ -109,20 +176,5 @@ Pass on redux styled actions object to `messenger.dispatch(action)` to send to F
 {
   type: 'REMOVE_THREAD_SETTINGS',
   payload: {payload}
-}
-```
-
-## Retrieve user profile
-Use `messenger.getUserProfile(fbid)` to get the user profile which Returns
-
-```js
-{
-  first_name: 'First name'
-  last_name: 'Last name'
-  profile_pic: 'Profile picture'
-  locale: 'Locale of the user on Facebook'
-  timezone: 'Timezone, number relative to GMT'
-  gender: 'Gender'
-  is_payment_enabled: true || false
 }
 ```
