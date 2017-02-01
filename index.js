@@ -195,8 +195,8 @@ const Messenger = (options) => {
                 debug('Messenger Incoming: ', event);
 
                 _getUserProfile(event.sender.id)
-                    .then(userRaw => {
-                        const user = Object.assign({}, user, { _id: event.sender.id });
+                    .then(fbUser => {
+                        const user = Object.assign({}, fbUser, { _id: event.sender.id });
                         if(event.message && !event.message.quick_reply && !event.message.attachments) {
                             _dispatch({ type: 'TEXT', text: event.message.text, user });
                         } else if(event.message && event.message.quick_reply && !event.message.attachments) {
