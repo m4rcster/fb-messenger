@@ -1,6 +1,6 @@
 {
   "name": "@marcster/fb-messenger",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Redux action inspired framework to deal with Facebook messenger api.",
   "main": "index.js",
   "scripts": {
