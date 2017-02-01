@@ -40,49 +40,49 @@
  *  Received text message.
  *  @event TEXT
  *  @type {Action}
- *  @property {int} sender - fbid of sender
+ *  @property {object} user - fb details of user depending on fields set in options
  *  @property {string} text - message text
  *
  *  Received quick reply message.
  *  @event QUICK_REPLY
  *  @type {Action}
- *  @property {int} sender - fbid of sender
+ *  @property {object} user - fb details of user depending on fields set in options
  *  @property {object} payload - payload of the quick_reply
  *
  *  Received image attachment.
  *  @event IMAGE
  *  @type {Action}
- *  @property {int} sender - fbid of sender
+ *  @property {object} user - fb details of user depending on fields set in options
  *  @property {string} url - url of image
  *
  *  Received audio attachment.
  *  @event AUDIO
  *  @type {Action}
- *  @property {int} sender - fbid of sender
+ *  @property {object} user - fb details of user depending on fields set in options
  *  @property {string} url - url of audio file
  *
  *  Received video attachment.
  *  @event VIDEO
  *  @type {Action}
- *  @property {int} sender - fbid of sender
+ *  @property {object} user - fb details of user depending on fields set in options
  *  @property {string} url - url of video file
  *
  *  Received file attachment.
  *  @event FILE
  *  @type {Action}
- *  @property {int} sender - fbid of sender
+ *  @property {object} user - fb details of user depending on fields set in options
  *  @property {string} url - url of file
  *
  *  Received location attachment.
  *  @event LOCATION
  *  @type {Action}
- *  @property {int} sender - fbid of sender
+ *  @property {object} user - fb details of user depending on fields set in options
  *  @property {object} coordinates - coordinates object with property lat and long
  *
  *  Received postback message.
  *  @event POSTBACK
  *  @type {Action}
- *  @property {int} sender - fbid of sender
+ *  @property {object} user - fb details of user depending on fields set in options
  *  @property {object} payload - payload object of the postback
  *  @property {string} referral - referral string optional
  *
@@ -195,7 +195,8 @@ const Messenger = (options) => {
                 debug('Messenger Incoming: ', event);
 
                 _getUserProfile(event.sender.id)
-                    .then(user => {
+                    .then(userRaw => {
+                        const user = Object.assign({}, user, { _id: event.sender.id });
                         if(event.message && !event.message.quick_reply && !event.message.attachments) {
                             _dispatch({ type: 'TEXT', text: event.message.text, user });
                         } else if(event.message && event.message.quick_reply && !event.message.attachments) {
