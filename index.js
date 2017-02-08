@@ -110,7 +110,7 @@
  *
  */
 
-const debug = require('debug')('fb-messenger');
+const debug = require('debug')('messenger');
 const request = require('request-promise');
 const crypto = require('crypto');
 
@@ -135,7 +135,7 @@ const Messenger = (options) => {
 
         req.on('end', () => {
             if(!secret) {
-                console.error('Error, Missing app secret.');
+                debug('Error, Missing app secret.');
                 return res.end();
             }
 
@@ -143,7 +143,7 @@ const Messenger = (options) => {
             hmac.update(body);
 
             if(req.headers['x-hub-signature'] !== `sha1=${hmac.digest('hex')}`) {
-                console.error('Error, Message integrity check failed.');
+                debug('Error, Message integrity check failed.');
                 return res.end();
             }
 
@@ -187,7 +187,7 @@ const Messenger = (options) => {
 
     const _handleMessage = (data) => {
         if(data.object !== 'page') {
-            return console.error('Error, Message not sent from page.');
+            return debug('Error, Message not sent from page.');
         }
         data.entry.forEach(entry => {
             let events = entry.messaging;
@@ -231,7 +231,7 @@ const Messenger = (options) => {
         if(req.query['hub.verify_token'] === verify) {
             return res.end(req.query['hub.challenge']);
         }
-        console.error('Failed validation. Make sure the validation tokens match.');
+        debug('Failed validation. Make sure the validation tokens match.');
         return res.end('Error, wrong validation token.');
     }
 
